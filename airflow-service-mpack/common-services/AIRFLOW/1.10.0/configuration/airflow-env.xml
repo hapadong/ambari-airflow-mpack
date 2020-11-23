@@ -27,7 +27,7 @@
   </property>
   <property>
     <name>airflow_group</name>
-    <value>airflow</value>
+    <value>hadoop</value>
     <display-name>Airflow group</display-name>
     <description></description>
     <on-ambari-upgrade add="true"/>
