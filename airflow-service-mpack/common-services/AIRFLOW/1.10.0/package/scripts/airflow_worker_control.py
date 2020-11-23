@@ -43,7 +43,7 @@ class AirflowWorker(Script):
 		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} --ignore-installed apache-airflow[slack]==1.10.0"))
 		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} --ignore-installed apache-airflow[ssh]==1.10.0"))
 		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} --ignore-installed apache-airflow[vertica]==1.10.0"))
-		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} --ignore-installed marshmallow-sqlalchemy==0.18.0"))
+		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} marshmallow-sqlalchemy==0.18.0"))
 		Execute(format("useradd {airflow_user}"), ignore_failures=True)
 		Execute(format("usermod -a -G {airflow_group} {airflow_user}"), ignore_failures=True)
 		Execute(format("mkdir -p {airflow_home}"))
