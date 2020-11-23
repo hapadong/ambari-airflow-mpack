@@ -19,13 +19,17 @@ Wants=postgresql.service mysql.service redis.service rabbitmq-server.service
 
 [Service]
 EnvironmentFile=/etc/sysconfig/airflow
+Environment="PATH=$PATH:{conda_root}/envs/airflow/bin"
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={airflow_home}/airflow_control.sh webserver
+ExecStart={conda_root}/envs/airflow/bin/airflow webserver -D --pid /var/run/airflow/webserver.pid --stderr /var/log/airflow/webserver.err --stdout /var/log/airflow/webserver.out -l /var/log/airflow/webserver.log
+PIDFile=/var/run/airflow/webserver.pid
 Restart=on-failure
 RestartSec=5s
 PrivateTmp=true
+StandardOutput=syslog+console
+SyslogIdentifier=airflow-scheduler
 
 [Install]
 WantedBy=multi-user.target
@@ -58,10 +62,13 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={airflow_home}/airflow_control.sh scheduler
+ExecStart={conda_root}/envs/airflow/bin/airflow scheduler -D --pid /var/run/airflow/scheduler.pid --stderr /var/log/airflow/scheduler.err --stdout /var/log/airflow/scheduler.out -l /var/log/airflow/scheduler.log
+PIDFile=/var/run/airflow/scheduler.pid
 Restart=on-failure
 RestartSec=5s
 PrivateTmp=true
+StandardOutput=syslog+console
+SyslogIdentifier=airflow-scheduler
 
 [Install]
 WantedBy=multi-user.target
@@ -94,10 +101,13 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={airflow_home}/airflow_control.sh worker
+ExecStart={conda_root}/envs/airflow/bin/airflow worker -D --pid /var/run/airflow/worker.pid --stderr /var/log/airflow/worker.err --stdout /var/log/airflow/worker.out -l /var/log/airflow/worker.log
+PIDFile=/var/run/airflow/worker.pid
 Restart=on-failure
 RestartSec=5s
 PrivateTmp=true
+StandardOutput=syslog+console
+SyslogIdentifier=airflow-worker
 
 [Install]
 WantedBy=multi-user.target
@@ -122,7 +132,7 @@ def airflow_make_startup_script(env):
 
 	confFileText = format("""#!/bin/bash
 
-export AIRFLOW_HOME={airflow_home} && $(which airflow) $1 --pid {airflow_home}/airflow-sys-$1.pid
+export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_home}/airflow-sys-$1.pid
 """)
 
 	with open(format("{airflow_home}/airflow_control.sh"), 'w') as configFile:
