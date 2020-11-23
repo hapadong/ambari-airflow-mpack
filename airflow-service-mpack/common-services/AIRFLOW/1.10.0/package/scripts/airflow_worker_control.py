@@ -44,7 +44,6 @@ class AirflowWorker(Script):
 		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} --ignore-installed apache-airflow[ssh]==1.10.0"))
 		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} --ignore-installed apache-airflow[vertica]==1.10.0"))
 		Execute(format("export SLUGIFY_USES_TEXT_UNIDECODE=yes && {conda_root}/envs/{conda_airflow_virtualenv}/bin/pip install --upgrade {airflow_pip_params} --ignore-installed marshmallow-sqlalchemy==0.18.0"))
-		Execute(format("chmod 755 /bin/airflow /usr/bin/airflow"))
 		Execute(format("useradd {airflow_user}"), ignore_failures=True)
 		Execute(format("mkdir -p {airflow_home}"))
 		airflow_make_startup_script(env)
