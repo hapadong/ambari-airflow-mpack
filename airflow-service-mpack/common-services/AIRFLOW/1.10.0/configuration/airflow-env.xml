@@ -69,7 +69,7 @@
   <!-- added for airflow conda virtual env -->
   <property>
     <name>conda_root</name>
-    <value>opt/anaconda3</value>
+    <value>/usr/local/hadoop_apps/anaconda2-5.2</value>
     <display-name>Anaconda root directory</display-name>
     <description>Anaconda root directory</description>
     <on-ambari-upgrade add="true"/>
