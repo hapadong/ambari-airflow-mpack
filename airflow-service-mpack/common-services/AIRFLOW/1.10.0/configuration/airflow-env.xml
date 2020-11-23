@@ -75,4 +75,12 @@
     <on-ambari-upgrade add="true"/>
   </property>
 
+  <property>
+    <name>conda_airflow_virtualenv</name>
+    <value>airflow</value>
+    <display-name>Anaconda virtual environment for airflow</display-name>
+    <description>Anaconda virtual environment for airflow</description>
+    <on-ambari-upgrade add="true"/>
+  </property>
+
 </configuration>
