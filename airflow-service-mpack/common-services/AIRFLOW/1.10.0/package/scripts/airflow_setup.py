@@ -101,7 +101,7 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={conda_root}/envs/airflow/bin/airflow worker -D --pid {airflow_worker_pid_file} --stderr /var/log/airflow/worker.err --stdout /var/log/airflow/worker.out -l /var/log/airflow/worker.log
+ExecStart={airflow_home}/airflow_control.sh worker
 PIDFile={airflow_worker_pid_file}
 Restart=on-failure
 RestartSec=5s
@@ -132,7 +132,7 @@ def airflow_make_startup_script(env):
 
 	confFileText = format("""#!/bin/bash
 
-export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_home}/airflow-sys-$1.pid
+export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_worker_pid_file}
 """)
 
 	with open(format("{airflow_home}/airflow_control.sh"), 'w') as configFile:
