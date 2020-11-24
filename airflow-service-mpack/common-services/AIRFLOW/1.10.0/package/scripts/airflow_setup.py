@@ -19,11 +19,10 @@ Wants=postgresql.service mysql.service redis.service rabbitmq-server.service
 
 [Service]
 EnvironmentFile=/etc/sysconfig/airflow
-Environment="PATH=$PATH:{conda_root}/envs/airflow/bin"
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={conda_root}/envs/airflow/bin/airflow webserver -D --pid {airflow_webserver_pid_file} --stderr /var/log/airflow/webserver.err --stdout /var/log/airflow/webserver.out -l /var/log/airflow/webserver.log
+ExecStart={airflow_home}/airflow_control.sh webserver
 PIDFile={airflow_webserver_pid_file}
 Restart=on-failure
 RestartSec=5s
@@ -62,7 +61,7 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={conda_root}/envs/airflow/bin/airflow scheduler -D --pid {airflow_scheduler_pid_file} --stderr /var/log/airflow/scheduler.err --stdout /var/log/airflow/scheduler.out -l /var/log/airflow/scheduler.log
+ExecStart={airflow_home}/airflow_control.sh scheduler
 PIDFile={airflow_scheduler_pid_file}
 Restart=on-failure
 RestartSec=5s
@@ -132,7 +131,7 @@ def airflow_make_startup_script(env):
 
 	confFileText = format("""#!/bin/bash
 
-export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_worker_pid_file}
+export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_home}/airflow-$1.pid
 """)
 
 	with open(format("{airflow_home}/airflow_control.sh"), 'w') as configFile:
