@@ -137,7 +137,7 @@ def airflow_make_startup_script(env):
 
 	confFileText = format("""#!/bin/bash
 
-export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_home}/airflow-$1.pid --stderr {airflow_base_log_dir}/$1.err --stdout {}airflow_base_log_dir}/$1.out -l {airflow_base_log_dir}/$1.log
+export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_home}/airflow-$1.pid --stderr {airflow_base_log_dir}/$1.err --stdout {airflow_base_log_dir}/$1.out -l {airflow_base_log_dir}/$1.log
 """)
 
 	with open(format("{airflow_home}/airflow_control.sh"), 'w') as configFile:
