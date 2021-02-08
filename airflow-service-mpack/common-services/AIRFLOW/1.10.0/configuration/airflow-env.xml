@@ -54,6 +54,13 @@
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
+    <name>airflow_base_log_dir</name>
+    <value>/var/log/airflow</value>
+    <display-name>Airflow Base Log Dir</display-name>
+    <description>Airflow base log directory for logs of scheduler, web server and worker</description>
+    <on-ambari-upgrade add="true"/>
+  </property>
+  <property>
     <name>airflow_pip_params</name>
     <value>--index-url http://d1trphadoop01:8089/simple --trusted-host d1trphadoop01</value>
     <display-name>Advanced pip installation parameters</display-name>

@@ -27,4 +27,4 @@ airflow_scheduler_pid_file = config['configurations']['airflow-env']['airflow_sc
 airflow_worker_pid_file = config['configurations']['airflow-env']['airflow_worker_pid_file']
 airflow_user = config['configurations']['airflow-env']['airflow_user']
 airflow_group = config['configurations']['airflow-env']['airflow_group']
-airflow_log_dir = config['configurations']['airflow-env']['base_log_folder']
+airflow_log_dir = config['configurations']['airflow-env']['airflow_base_log_dir']

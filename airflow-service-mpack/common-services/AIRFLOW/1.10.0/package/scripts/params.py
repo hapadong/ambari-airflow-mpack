@@ -46,5 +46,6 @@ airflow_webserver_pid_file = config['configurations']['airflow-env']['airflow_we
 airflow_scheduler_pid_file = config['configurations']['airflow-env']['airflow_scheduler_pid_file']
 airflow_worker_pid_file = config['configurations']['airflow-env']['airflow_worker_pid_file']
 airflow_pip_params = config['configurations']['airflow-env']['airflow_pip_params']
+airflow_base_log_dir = config['configurations']['airflow-env']['airflow_base_log_dir']
 conda_root = config['configurations']['airflow-env']['conda_root']
 conda_airflow_virtualenv = config['configurations']['airflow-env']['conda_airflow_virtualenv']
