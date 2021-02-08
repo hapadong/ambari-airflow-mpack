@@ -40,7 +40,7 @@ WantedBy=multi-user.target
 	configFile.close()
 
 	confFileText = format("""AIRFLOW_HOME={airflow_home}
-	PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
+PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
 	""")
 
 	with open("/etc/sysconfig/airflow", 'w') as configFile:
@@ -81,7 +81,7 @@ WantedBy=multi-user.target
 	configFile.close()
 
 	confFileText = format("""AIRFLOW_HOME={airflow_home}
-	PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
+PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
 	""")
 
 	with open("/etc/sysconfig/airflow", 'w') as configFile:
@@ -122,7 +122,7 @@ WantedBy=multi-user.target
 	configFile.close()
 
 	confFileText = format("""AIRFLOW_HOME={airflow_home}
-	PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
+PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
 	""")
 
 	with open("/etc/sysconfig/airflow", 'w') as configFile:
