@@ -22,35 +22,35 @@
     <name>airflow_user</name>
     <value>airflow</value>
     <display-name>Airflow user</display-name>
-    <description></description>
+    <description>Airflow user</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_group</name>
     <value>hadoop</value>
     <display-name>Airflow group</display-name>
-    <description></description>
+    <description>Airflow group</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_webserver_pid_file</name>
-    <value>/usr/local/airflow/airflow-sys-webserver.pid</value>
+    <value>/usr/local/airflow/airflow-webserver.pid</value>
     <display-name>Airflow webserver PID file</display-name>
-    <description></description>
+    <description>Airflow webserver PID file</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_scheduler_pid_file</name>
     <value>/usr/local/airflow/airflow-scheduler.pid</value>
     <display-name>Airflow scheduler PID file</display-name>
-    <description></description>
+    <description>Airflow scheduler PID file</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_worker_pid_file</name>
     <value>/usr/local/airflow/airflow-worker.pid</value>
     <display-name>Airflow worker PID file</display-name>
-    <description></description>
+    <description>Airflow worker PID file</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
