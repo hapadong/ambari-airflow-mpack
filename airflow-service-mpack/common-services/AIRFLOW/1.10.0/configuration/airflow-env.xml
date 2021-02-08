@@ -21,36 +21,36 @@
   <property>
     <name>airflow_user</name>
     <value>airflow</value>
-    <display-name>Airflow user</display-name>
-    <description>Airflow user</description>
+    <display-name>Airflow User</display-name>
+    <description>Airflow user to run program</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_group</name>
     <value>hadoop</value>
-    <display-name>Airflow group</display-name>
-    <description>Airflow group</description>
+    <display-name>Airflow Group</display-name>
+    <description>Airflow group that airflow user belongs to</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_webserver_pid_file</name>
     <value>/usr/local/airflow/airflow-webserver.pid</value>
-    <display-name>Airflow webserver PID file</display-name>
-    <description>Airflow webserver PID file</description>
+    <display-name>Airflow Webserver PID File</display-name>
+    <description>Path to Airflow webserver PID file</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_scheduler_pid_file</name>
     <value>/usr/local/airflow/airflow-scheduler.pid</value>
-    <display-name>Airflow scheduler PID file</display-name>
-    <description>Airflow scheduler PID file</description>
+    <display-name>Airflow Scheduler PID File</display-name>
+    <description>Path to Airflow scheduler PID file</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>airflow_worker_pid_file</name>
     <value>/usr/local/airflow/airflow-worker.pid</value>
-    <display-name>Airflow worker PID file</display-name>
-    <description>Airflow worker PID file</description>
+    <display-name>Airflow Worker PID File</display-name>
+    <description>Path to Airflow worker PID file</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
@@ -58,11 +58,11 @@
     <value>--index-url http://d1trphadoop01:8089/simple --trusted-host d1trphadoop01</value>
     <display-name>Advanced pip installation parameters</display-name>
     <description>Advanced parameters for pip cmd, e.g.: --index-url https://link --trusted-host host</description>
-    <value-attributes>
+    <!--<value-attributes>
       <overridable>false</overridable>
       <editable-only-at-install>true</editable-only-at-install>
       <empty-value-valid>true</empty-value-valid>
-    </value-attributes>
+    </value-attributes>-->
     <on-ambari-upgrade add="true"/>
   </property>
 
@@ -70,16 +70,16 @@
   <property>
     <name>conda_root</name>
     <value>/usr/local/hadoop_apps/anaconda2-5.2</value>
-    <display-name>Anaconda root directory</display-name>
-    <description>Anaconda root directory</description>
+    <display-name>Anaconda Root</display-name>
+    <description>Anaconda base directory</description>
     <on-ambari-upgrade add="true"/>
   </property>
 
   <property>
     <name>conda_airflow_virtualenv</name>
     <value>airflow</value>
-    <display-name>Anaconda virtual environment for airflow</display-name>
-    <description>Anaconda virtual environment for airflow</description>
+    <display-name>Anaconda Virtual Environment for Airflow</display-name>
+    <description>Anaconda virtual environment for airflow. This is created by conda create command. </description>
     <on-ambari-upgrade add="true"/>
   </property>
 
