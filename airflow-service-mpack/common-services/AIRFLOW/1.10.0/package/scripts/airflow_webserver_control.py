@@ -50,7 +50,6 @@ class AirflowWebserver(Script):
 		Execute(format("usermod -a -G {airflow_group} {airflow_user}"), ignore_failures=True)
 		Execute(format("mkdir -p {airflow_home}"))
 		Execute(format("mkdir -p /var/log/airflow"))
-		airflow_make_startup_script(env)
 		Execute(format("chown -R {airflow_user}:{airflow_group} {airflow_home}"))
 		Execute(format("chown -R {airflow_user}:{airflow_group} /var/log/airflow"))
 		Execute(format("export AIRFLOW_HOME={airflow_home} && {conda_root}/envs/{conda_airflow_virtualenv}/bin/airflow initdb"),

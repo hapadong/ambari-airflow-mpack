@@ -22,12 +22,10 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={airflow_home}/airflow_control.sh webserver
-PIDFile={airflow_webserver_pid_file}
-Restart=on-failure
+ExecStart={conda_root}/envs/{conda_airflow_virtualenv}/bin/airflow webserver -D --pid /usr/local/airflow/airflow-webserver.pid --stderr /var/log/airflow/webserver.err --stdout /var/log/airflow/webserver.out -l /var/log/airflow/webserver.log
+PIDFile=/usr/local/airflow/airflow-webserver.pid
+Restart=always
 RestartSec=5s
-PrivateTmp=true
-StandardOutput=syslog+console
 SyslogIdentifier=airflow-scheduler
 
 [Install]
@@ -40,7 +38,8 @@ WantedBy=multi-user.target
 	configFile.close()
 
 	confFileText = format("""AIRFLOW_HOME={airflow_home}
-PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
+AIRFLOW_CONFIG={airflow_home}/airflow.cfg
+PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 	""")
 
 	with open("/etc/sysconfig/airflow", 'w') as configFile:
@@ -63,12 +62,10 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={airflow_home}/airflow_control.sh scheduler
-PIDFile={airflow_scheduler_pid_file}
-Restart=on-failure
+ExecStart={conda_root}/envs/{conda_airflow_virtualenv}/bin/airflow scheduler -D --pid /usr/local/airflow/airflow-scheduler.pid --stderr /var/log/airflow/scheduler.err --stdout /var/log/airflow/scheduler.out -l /var/log/airflow/scheduler.log
+PIDFile=/usr/local/airflow/airflow-scheduler.pid
+Restart=always
 RestartSec=5s
-PrivateTmp=true
-StandardOutput=syslog+console
 SyslogIdentifier=airflow-scheduler
 
 [Install]
@@ -81,7 +78,8 @@ WantedBy=multi-user.target
 	configFile.close()
 
 	confFileText = format("""AIRFLOW_HOME={airflow_home}
-PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
+AIRFLOW_CONFIG={airflow_home}/airflow.cfg
+PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 	""")
 
 	with open("/etc/sysconfig/airflow", 'w') as configFile:
@@ -104,12 +102,10 @@ EnvironmentFile=/etc/sysconfig/airflow
 User={airflow_user}
 Group={airflow_group}
 Type=simple
-ExecStart={airflow_home}/airflow_control.sh worker
-PIDFile={airflow_worker_pid_file}
-Restart=on-failure
+ExecStart={conda_root}/envs/{conda_airflow_virtualenv}/bin/airflow worker -D --pid /usr/local/airflow/airflow-worker.pid --stderr /var/log/airflow/worker.err --stdout /var/log/airflow/worker.out -l /var/log/airflow/worker.log
+PIDFile=/usr/local/airflow/airflow-worker.pid
+Restart=always
 RestartSec=5s
-PrivateTmp=true
-StandardOutput=syslog+console
 SyslogIdentifier=airflow-worker
 
 [Install]
@@ -122,7 +118,8 @@ WantedBy=multi-user.target
 	configFile.close()
 
 	confFileText = format("""AIRFLOW_HOME={airflow_home}
-PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
+AIRFLOW_CONFIG={airflow_home}/airflow.cfg
+PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 	""")
 
 	with open("/etc/sysconfig/airflow", 'w') as configFile:
@@ -131,19 +128,6 @@ PATH={conda_root}/envs/{conda_airflow_virtualenv}/bin:$PATH
 
 	Execute("systemctl daemon-reload")
 
-def airflow_make_startup_script(env):
-	import params
-	env.set_params(params)
-
-	confFileText = format("""#!/bin/bash
-
-export AIRFLOW_HOME={airflow_home} && source {conda_root}/bin/activate airflow && $(which airflow) $1 --pid {airflow_home}/airflow-$1.pid --stderr {airflow_base_log_dir}/$1.err --stdout {airflow_base_log_dir}/$1.out -l {airflow_base_log_dir}/$1.log
-""")
-
-	with open(format("{airflow_home}/airflow_control.sh"), 'w') as configFile:
-		configFile.write(confFileText)
-	configFile.close()
-	Execute(format("chmod 755 {airflow_home}/airflow_control.sh"))
 
 def airflow_generate_config_for_section(sections):
 	"""
